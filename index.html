@@ -1,0 +1,68 @@
+<!-- <html>
+<body>
+	<button>Play</button>
+	<webview id="foo" src="https://www.github.com/" style="display:inline-flex; width:640px; height:480px"></webview>
+</body>
+</html> -->
+
+<html>
+
+<head>
+  <style>
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    #player {
+      width: 80%;
+      height: 80%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <input type="button" name="play" value="Play" id="play" style="width:40px; height:20px" onclick="myFunction()" /> -->
+  <div id="player"></div>
+  <webview id="foo" src="http://localhost/testelectron"
+    nodeintegration plugins style="display:inline-flex; width:640px; height:480px; background: red">
+    <script>
+	var wjs = require("wcjs-player");
+   var player = new wjs("#player").addPlayer({
+     autoplay: true,
+     wcjs: require("wcjs-prebuilt")
+   });
+   
+      const webview = document.querySelector('webview')
+      /*webview.addEventListener('console-message', (event) => {
+        //console.log("event-message",event.message);
+		//play();
+        // Prints "pong"
+      });*/
+	  
+	  webview.addEventListener('ipc-message', (event) => {
+		console.log(event.channel)
+		play();
+		webview.send("ping","pinggggggggggg");
+	});
+      // webview.send('ping')
+
+      // var myWebview = document.getElementById('foo');
+      // console.log("myWebview: ", myWebview);
+      // console.log("prototype: ", Object.getPrototypeOf(myWebview)); //=> HTMLElement
+      // myWebview.addEventListener("dom-ready", function () {
+      //   myWebview.openDevTools();
+      // });
+  // myWebview.openDevTools();
+  
+  function play()
+  {
+	player.addPlaylist("file:///C:/Users/admin/Videos/a.mp4");
+  }
+    </script>
+</body>
+
+</html>

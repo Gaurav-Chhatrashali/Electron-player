@@ -1,0 +1,13 @@
+{
+    "name": "wcjs-player-multiscreen-demo",
+    "description": "WebChimera.js Player Multiscreen Demo",
+    "version": "0.0.2",
+    "private": true,
+    "main": "app://host/index.html",
+    "dependencies": {
+        "electron": "^1.4.13",
+        "wcjs-player": "^6.0.0",
+        "wcjs-prebuilt": "^3.0.0"
+    },
+    "env": "development"
+}
