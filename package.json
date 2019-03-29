@@ -4,6 +4,9 @@
     "version": "0.0.2",
     "private": true,
     "main": "app://host/index.html",
+    "scripts": {
+        "start": "electron ."
+    },
     "dependencies": {
         "electron": "^1.4.13",
         "wcjs-player": "^6.0.0",
