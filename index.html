@@ -34,12 +34,12 @@
       const customTitlebar = require('@inceldes/cet');
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
-        backgroundColor: customTitlebar.Color.fromHex('#fff'),
+        backgroundColor: customTitlebar.Color.fromHex(values.titleBarColor),
         menu: false,
         drag: true,
         maximizable: true,
         minimizable: true,
-        icon: values.variableName
+        icon: values.icon
       });
       var conf = {
         wcjs: require('wcjs-prebuilt'),

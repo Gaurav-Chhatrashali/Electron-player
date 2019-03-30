@@ -1,2 +1,2 @@
 // var favicon = "my value";
-module.exports = { variableName: './favicon/google.png' };
+module.exports = { icon: './favicon/google.png', titleBarColor: '#fff'  };
