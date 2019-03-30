@@ -26,9 +26,12 @@
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
         backgroundColor: customTitlebar.Color.fromHex('#fff'),
-        menu: false
+        menu: false,
+        drag: true,
+        maximizable: true,
+        minimizable: true
       });
-
+      
       var wjs = require("wcjs-player");
       var player = new wjs("#player").addPlayer({
         autoplay: true,
