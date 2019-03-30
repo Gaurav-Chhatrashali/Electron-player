@@ -10,19 +10,28 @@
       margin: 0px;
     }
 
-    #player {
-      width: 100%;
-      height: 100%;
+    .webchimeras {
+      float: left;
+      width: 50%;
+      height: 50%
     }
   </style>
+  <!-- <link rel="stylesheet" href="./global_env.js"> -->
 </head>
 
 <body>
   <!-- <input type="button" name="play" value="Play" id="play" style="width:40px; height:20px" onclick="myFunction()" /> -->
-  <div id="player"></div>
-  <webview id="foo" src="http://localhost/testelectron" nodeintegration>
+  <div id="player1"></div>
+  <div id="player2"></div>
+  <div id="player3"></div>
+  <div id="player4"></div>
+
+  <webview id="foo" src="http://localhost/testelectron" nodeintegration style="width:50px">
     <script>
-      const customTitlebar = require('custom-electron-titlebar');
+
+      const values = require('./global_env.js');
+      console.log("MY-value", values);
+      const customTitlebar = require('@inceldes/cet');
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
         backgroundColor: customTitlebar.Color.fromHex('#fff'),
@@ -30,22 +39,33 @@
         drag: true,
         maximizable: true,
         minimizable: true,
-        icon: './favicon/google.png'
+        icon: values.variableName
       });
-      
-      var wjs = require("wcjs-player");
-      var player = new wjs("#player").addPlayer({
+      var conf = {
+        wcjs: require('wcjs-prebuilt'),
+        multiscreen: true,
         autoplay: true,
-        wcjs: require("wcjs-prebuilt")
-      });
+        loop: true
+      };
+
+      var wjs = require("wcjs-player");
+      var player1 = new wjs("#player1").addPlayer(conf);
+      var player2 = new wjs("#player2").addPlayer(conf);
+      var player3 = new wjs("#player3").addPlayer(conf);
+      var player4 = new wjs("#player4").addPlayer(conf);
       const webview = document.querySelector('webview')
       webview.addEventListener('ipc-message', (event) => {
         console.log(event.channel)
-        play();
+        play(player1);
+        play(player2);
+        play(player3);
+        play(player4);
         webview.send("ping", "pinggggggggggg");
       });
-      function play() {
-        player.addPlaylist("file:///C:/Users/admin/Videos/a.mp4");
+
+      function play(player) {
+        player.addPlaylist("file:///C:/Users/Public/Videos/Sample Videos/Wildlife.wmv");
+        crop: "16:9";
       }
     </script>
 </body>

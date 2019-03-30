@@ -8,7 +8,7 @@
         "start": "electron ."
     },
     "dependencies": {
-        "custom-electron-titlebar": "^3.0.5",
+        "@inceldes/cet": "^1.0.1",
         "electron": "^1.4.13",
         "wcjs-player": "^6.0.0",
         "wcjs-prebuilt": "^3.0.0"
