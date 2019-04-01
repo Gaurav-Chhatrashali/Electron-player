@@ -28,18 +28,17 @@
 
   <webview id="foo" src="http://localhost/testelectron" nodeintegration style="width:50px">
     <script>
-
-      const values = require('./global_env.js');
+      const env = require('./global_env.js');
       console.log("MY-value", values);
       const customTitlebar = require('@inceldes/cet');
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
-        backgroundColor: customTitlebar.Color.fromHex(values.titleBarColor),
+        backgroundColor: customTitlebar.Color.fromHex(env.titleBarColor),
         menu: false,
         drag: true,
         maximizable: true,
         minimizable: true,
-        icon: values.icon
+        icon: env.icon
       });
       var conf = {
         wcjs: require('wcjs-prebuilt'),
