@@ -5,16 +5,20 @@ body, html {
     margin: 0px;
 }
 
-.player-resize {
-    resize: both;
-    overflow: auto
-}
-
 .webchimeras {
     float: left;
     width: 50%;
-    height: 50%
+    height: 50%;
   }
+
+  .resize-div {
+    border: 5px solid;
+    padding: 5px; 
+    /* width: 300px; */
+    resize: both;
+    overflow: auto;
+}
+  
 
 #player1 {
     position: absolute;
@@ -23,7 +27,6 @@ body, html {
     /* border: 1px solid #d3d3d3;
     text-align: center; */
     cursor: move;
-    /* visibility: hidden; */
   }
   #player2 {
     position: absolute;
@@ -32,7 +35,6 @@ body, html {
     /* border: 1px solid #d3d3d3;
     text-align: center; */
     cursor: move;
-    /* visibility: hidden; */
   }
   #player3 {
     position: absolute;
@@ -41,7 +43,6 @@ body, html {
     /* border: 1px solid #d3d3d3;
     text-align: center; */
     cursor: move;
-    /* visibility: hidden; */
   }
   #player4 {
     position: absolute;
@@ -50,5 +51,4 @@ body, html {
     /* border: 1px solid #d3d3d3;
     text-align: center; */
     cursor: move;
-    /* visibility: hidden; */
   }

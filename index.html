@@ -6,7 +6,9 @@
 
 <body>
   <!-- <input type="button" name="play" value="Play" id="play" style="width:40px; height:20px" onclick="myFunction()" /> -->
-  <div id="player1"></div>
+  <div id="player1" class="resize-div"></div>
+
+
   <!-- COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS -->
   <!-- <div id="player2"></div>
   <div id="player3"></div>
@@ -14,6 +16,8 @@
 
   <webview id="foo" src="http://192.168.0.109/zygal/home.php" nodeintegration style="width:100%;height:100%">
     <script>
+      const env = require('./global_env.js');
+      const customTitlebar = require('@inceldes/cet');
       dragElement(document.getElementById("player1"));
       /* COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS */
       // dragElement(document.getElementById("player2"));
@@ -21,14 +25,18 @@
       // dragElement(document.getElementById("player4"));
 
       function dragElement(elmnt) {
+        console.log("Elmnt", elmnt);
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         if (document.getElementById(elmnt.id)) {
+          console.log("document", document.getElementById(elmnt));
+          console.log("111", document.getElementById(elmnt.id).onmousedown);
           document.getElementById(elmnt.id).onmousedown = dragMouseDown;
         } else {
           elmnt.onmousedown = dragMouseDown;
         }
 
         function dragMouseDown(e) {
+          console.log("E", e);
           e = e || window.event;
           e.preventDefault();
           pos3 = e.clientX;
@@ -38,6 +46,7 @@
         }
 
         function elementDrag(e) {
+          console.log("e", e);
           e = e || window.event;
           e.preventDefault();
           pos1 = pos3 - e.clientX;
@@ -49,13 +58,12 @@
         }
 
         function closeDragElement() {
+          console.log("close");
           document.onmouseup = null;
           document.onmousemove = null;
         }
       }
 
-      const env = require('./global_env.js');
-      const customTitlebar = require('@inceldes/cet');
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
         backgroundColor: customTitlebar.Color.fromHex(env.titleBarColor),
@@ -65,6 +73,10 @@
         minimizable: true,
         icon: env.icon
       });
+      /* COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS */
+      // var player2 = new wjs("#player2").addPlayer(conf);
+      // var player3 = new wjs("#player3").addPlayer(conf);
+      // var player4 = new wjs("#player4").addPlayer(conf);
       var conf = {
         wcjs: require('wcjs-prebuilt'),
         multiscreen: true,
@@ -73,15 +85,11 @@
       };
 
       var wjs = require("wcjs-player");
-      var player1 = new wjs("#player1").addPlayer(conf);
-      /* COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS */
-
-      // var player2 = new wjs("#player2").addPlayer(conf);
-      // var player3 = new wjs("#player3").addPlayer(conf);
-      // var player4 = new wjs("#player4").addPlayer(conf);
       const webview = document.querySelector('webview')
       webview.addEventListener('ipc-message', (event) => {
-        console.log(event.channel)
+        // document.write(" <div id='player1'></div>");
+        var player1 = new wjs("#player1").addPlayer(conf);
+        console.log(event.channel);
         console.log(event.args[0]);
         play(player1);
         // play(player2);
