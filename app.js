@@ -8,5 +8,4 @@ function createWindow() {
   win.loadURL('file://' + __dirname + '/index.html')
   win.openDevTools({ detach: false });
 }
-
 app.on('ready', createWindow)
