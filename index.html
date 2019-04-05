@@ -2,13 +2,45 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
+<style>
+  #player1 {
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    top: 20%;
+    left: 20%;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+    border: 2px solid purple;
+    background: #fefefe;
+  }
+
+  #title {
+    font-family: monospace;
+    background: purple;
+    color: white;
+    font-size: 24px;
+    height: 30px;
+    text-align: center;
+  }
+
+  html {
+    font-size: calc(16px + 1vw);
+    font-family: sans-serif;
+  }
+</style>
+
 
 <body>
   <!-- <input type="button" name="play" value="Play" id="play" style="width:40px; height:20px" onclick="myFunction()" /> -->
-  <div id="player1" class="resize-div"></div>
-
-
+  <div id="player1"></div>
   <!-- COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS -->
   <!-- <div id="player2"></div>
   <div id="player3"></div>
@@ -18,51 +50,6 @@
     <script>
       const env = require('./global_env.js');
       const customTitlebar = require('@inceldes/cet');
-      dragElement(document.getElementById("player1"));
-      /* COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS */
-      // dragElement(document.getElementById("player2"));
-      // dragElement(document.getElementById("player3"));
-      // dragElement(document.getElementById("player4"));
-
-      function dragElement(elmnt) {
-        console.log("Elmnt", elmnt);
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById(elmnt.id)) {
-          console.log("document", document.getElementById(elmnt));
-          console.log("111", document.getElementById(elmnt.id).onmousedown);
-          document.getElementById(elmnt.id).onmousedown = dragMouseDown;
-        } else {
-          elmnt.onmousedown = dragMouseDown;
-        }
-
-        function dragMouseDown(e) {
-          console.log("E", e);
-          e = e || window.event;
-          e.preventDefault();
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          document.onmouseup = closeDragElement;
-          document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-          console.log("e", e);
-          e = e || window.event;
-          e.preventDefault();
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        }
-
-        function closeDragElement() {
-          console.log("close");
-          document.onmouseup = null;
-          document.onmousemove = null;
-        }
-      }
 
       // Menu.getApplicationMenu()
       new customTitlebar.Titlebar({
@@ -103,6 +90,7 @@
         crop: "16:9";
       }
     </script>
+    <script src="drag.js"></script>
 </body>
 
 </html>
