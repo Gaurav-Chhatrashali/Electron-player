@@ -29,10 +29,10 @@ var pane = document.getElementById('player1');
 //var ghostpane = document.getElementById('ghostpane');
 
 function setBounds(element, x, y, w, h) {
-	element.style.left = x + 'px';
-	element.style.top = y + 'px';
-	element.style.width = w + 'px';
-	element.style.height = h + 'px';
+  element.style.left = x + 'px';
+  element.style.top = y + 'px';
+  element.style.width = w + 'px';
+  element.style.height = h + 'px';
 }
 
 function hintHide() {
@@ -61,11 +61,11 @@ function onTouchDown(e) {
 }
 
 function onTouchMove(e) {
-  onMove(e.touches[0]);		
+  onMove(e.touches[0]);
 }
 
 function onTouchEnd(e) {
-  if (e.touches.length ==0) onUp(e.changedTouches[0]);
+  if (e.touches.length == 0) onUp(e.changedTouches[0]);
 }
 
 function onMouseDown(e) {
@@ -116,74 +116,57 @@ var e;
 
 function onMove(ee) {
   calc(ee);
-
   e = ee;
-
   redraw = true;
-
 }
 
 function animate() {
-
   requestAnimationFrame(animate);
-
   if (!redraw) return;
-
   redraw = false;
-
   if (clicked && clicked.isResizing) {
-
     if (clicked.onRightEdge) pane.style.width = Math.max(x, minWidth) + 'px';
     if (clicked.onBottomEdge) pane.style.height = Math.max(y, minHeight) + 'px';
-
     if (clicked.onLeftEdge) {
-      var currentWidth = Math.max(clicked.cx - e.clientX  + clicked.w, minWidth);
+      var currentWidth = Math.max(clicked.cx - e.clientX + clicked.w, minWidth);
       if (currentWidth > minWidth) {
         pane.style.width = currentWidth + 'px';
-        pane.style.left = e.clientX + 'px';	
+        pane.style.left = e.clientX + 'px';
       }
     }
 
     if (clicked.onTopEdge) {
-      var currentHeight = Math.max(clicked.cy - e.clientY  + clicked.h, minHeight);
+      var currentHeight = Math.max(clicked.cy - e.clientY + clicked.h, minHeight);
       if (currentHeight > minHeight) {
         pane.style.height = currentHeight + 'px';
-        pane.style.top = e.clientY + 'px';	
+        pane.style.top = e.clientY + 'px';
       }
     }
-
     hintHide();
-
     return;
   }
 
   if (clicked && clicked.isMoving) {
-
     if (b.top < FULLSCREEN_MARGINS || b.left < FULLSCREEN_MARGINS || b.right > window.innerWidth - FULLSCREEN_MARGINS || b.bottom > window.innerHeight - FULLSCREEN_MARGINS) {
       // hintFull();
-     
     } else if (b.top < MARGINS) {
       // hintTop();
-      
     } else if (b.left < MARGINS) {
       // hintLeft();
-      
     } else if (b.right > rightScreenEdge) {
-      // hintRight();
-      
+      // hntRight();
     } else if (b.bottom > bottomScreenEdge) {
       // hintBottom();
-     
     } else {
       hintHide();
     }
 
     if (preSnapped) {
       setBounds(pane,
-      	e.clientX - preSnapped.width / 2,
-      	e.clientY - Math.min(clicked.y, preSnapped.height),
-      	preSnapped.width,
-      	preSnapped.height
+        e.clientX - preSnapped.width / 2,
+        e.clientY - Math.min(clicked.y, preSnapped.height),
+        preSnapped.width,
+        preSnapped.height
       );
       return;
     }
@@ -191,7 +174,6 @@ function animate() {
     // moving
     pane.style.top = (e.clientY - clicked.y) + 'px';
     pane.style.left = (e.clientX - clicked.x) + 'px';
-
     return;
   }
 
@@ -217,7 +199,6 @@ animate();
 
 function onUp(e) {
   calc(e);
-
   if (clicked && clicked.isMoving) {
     // Snap
     var snapped = {
@@ -248,11 +229,7 @@ function onUp(e) {
     } else {
       preSnapped = null;
     }
-
     hintHide();
-
   }
-
   clicked = null;
-
 }

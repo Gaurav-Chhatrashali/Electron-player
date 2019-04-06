@@ -68,14 +68,22 @@
         wcjs: require('wcjs-prebuilt'),
         multiscreen: true,
         autoplay: true,
-        loop: true
+        loop: true,
+        toolbar:0,
+        mouseevents:0
       };
 
       var wjs = require("wcjs-player");
+      // wjs("#player1").addPlayer({ id: "webchimera", theme: "sleek", mouseevents: 0, autoplay: 1 });
       const webview = document.querySelector('webview')
       webview.addEventListener('ipc-message', (event) => {
-        // document.write(" <div id='player1'></div>");
         var player1 = new wjs("#player1").addPlayer(conf);
+        // wjs("#player1").addPlaylist(myplaylist);
+        // wjs("#player1").qmlLoaded(function () {
+        //   this.onClicked(function (button) {
+        //     span.innerHTML = "You Clicked: " + button;
+        //   });
+        // });
         console.log(event.channel);
         console.log(event.args[0]);
         play(player1);
@@ -88,6 +96,11 @@
       function play(player) {
         player.addPlaylist("file:///C:/Users/Public/Videos/Sample Videos/Wildlife.wmv");
         crop: "16:9";
+        // player.hide
+        // player.find('.wcp-surface').off('click');
+        player.find(".wcp-surface").unbind("click").unbind("dblclick").css("cursor","default","important"); // Mouse Events disable
+
+
       }
     </script>
     <script src="drag.js"></script>
