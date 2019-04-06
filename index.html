@@ -41,6 +41,8 @@
 <body>
   <!-- <input type="button" name="play" value="Play" id="play" style="width:40px; height:20px" onclick="myFunction()" /> -->
   <div id="player1"></div>
+
+  <input type="button" style="width:40px;height:40px;color: red" value="stop" onclick="stopPlayer()">
   <!-- COMMENTED CODE FOR TESTING OF MULTIPLE CAMERA VIEWS -->
   <!-- <div id="player2"></div>
   <div id="player3"></div>
@@ -69,15 +71,13 @@
         multiscreen: true,
         autoplay: true,
         loop: true,
-        toolbar:0,
-        mouseevents:0
       };
 
       var wjs = require("wcjs-player");
       // wjs("#player1").addPlayer({ id: "webchimera", theme: "sleek", mouseevents: 0, autoplay: 1 });
-      const webview = document.querySelector('webview')
+      const webview = document.querySelector('webview');
+      var player1 = new wjs("#player1").addPlayer(conf);
       webview.addEventListener('ipc-message', (event) => {
-        var player1 = new wjs("#player1").addPlayer(conf);
         // wjs("#player1").addPlaylist(myplaylist);
         // wjs("#player1").qmlLoaded(function () {
         //   this.onClicked(function (button) {
@@ -94,13 +94,15 @@
       });
 
       function play(player) {
+        document.getElementById("player1").style.visibility = "visible";
         player.addPlaylist("file:///C:/Users/Public/Videos/Sample Videos/Wildlife.wmv");
         crop: "16:9";
-        // player.hide
-        // player.find('.wcp-surface').off('click');
-        player.find(".wcp-surface").unbind("click").unbind("dblclick").css("cursor","default","important"); // Mouse Events disable
+        player.find(".wcp-surface").unbind("click").unbind("dblclick").css("cursor", "default", "important"); // Mouse Events disable
+      }
 
-
+      function stopPlayer() {
+        player1.stop();
+        document.getElementById("player1").style.visibility = "hidden";
       }
     </script>
     <script src="drag.js"></script>
